@@ -17,8 +17,8 @@
     "seed:firebase": "node scripts/seed-firebase.js && node scripts/seed-users-firebase.js"
   },
   "dependencies": {
-    "@heroicons/react": "^2.1.5",
     "@hello-pangea/dnd": "^16.6.0",
+    "@heroicons/react": "^2.1.5",
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.9",
     "clsx": "^2.1.1",
@@ -45,6 +45,6 @@
     "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.14",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.8.3"
   }
 }
