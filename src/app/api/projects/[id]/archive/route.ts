@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { archiveProject, unarchiveProject } from '@/services/projectService';
+import { archiveProject, unarchiveProject } from '../../../../../services/projectService';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { authOptions } from '../../../../../lib/auth';
 
 // POST /api/projects/[id]/archive - Archive a project
 export async function POST(

@@ -3,11 +3,11 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import AppLayout from '@/components/AppLayout';
+import AppLayout from '../../components/AppLayout';
 import { UserIcon, BellIcon, PaintBrushIcon, LinkIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
-import { auth } from '@/lib/firebase';
+import { auth } from '../../lib/firebase';
 import { updatePassword, EmailAuthProvider, reauthenticateWithCredential, AuthError } from 'firebase/auth';
-import { updateUser, sendPasswordReset } from '@/lib/user-utils';
+import { updateUser, sendPasswordReset } from '../../lib/user-utils';
 import toast from 'react-hot-toast';
 
 // Type definitions

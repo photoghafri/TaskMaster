@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import AppLayout from '@/components/AppLayout';
-import ProjectForm from '@/components/ProjectForm';
+import AppLayout from '../../../../components/AppLayout';
+import ProjectForm from '../../../../components/ProjectForm';
 
 interface Project {
   id: string;

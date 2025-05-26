@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { authOptions } from '../../../lib/auth';
 import {
   getAllUsers,
   createUser,
@@ -8,8 +8,8 @@ import {
   deleteUser,
   getUserByEmail,
   getUserById
-} from '@/services/userService';
-import { db } from '@/lib/firebase';
+} from '../../../services/userService';
+import { db } from '../../../lib/firebase';
 import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
 import bcrypt from 'bcryptjs';
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getArchivedProjects } from '@/services/projectService';
+import { getArchivedProjects } from '../../../../services/projectService';
 
 // GET /api/projects/archived - Get all archived projects
 export async function GET() {
