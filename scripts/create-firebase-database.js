@@ -1,0 +1,25 @@
+// Script to guide the user through Firebase database creation
+console.log('=== Firebase Database Creation Guide ===');
+console.log('');
+console.log('You need to create a Firestore database in your Firebase project before using it.');
+console.log('');
+console.log('Follow these steps:');
+console.log('');
+console.log('1. Go to the Firebase console: https://console.firebase.google.com/');
+console.log('2. Select your project: "project-management-f45cc"');
+console.log('3. In the left sidebar, click on "Firestore Database"');
+console.log('4. Click "Create database"');
+console.log('5. Choose "Start in production mode" (recommended) or "Start in test mode" for development');
+console.log('6. Select a location closest to your users (e.g., "us-central")');
+console.log('7. Click "Enable"');
+console.log('');
+console.log('After creating the database, you can run these scripts to set up your data:');
+console.log('');
+console.log('1. node scripts/seed-firebase.js       (to create departments)');
+console.log('2. node scripts/seed-users-firebase.js (to create users)');
+console.log('');
+console.log('Then start your application with:');
+console.log('');
+console.log('npm run dev');
+console.log('');
+console.log('=== End of Guide ==='); 

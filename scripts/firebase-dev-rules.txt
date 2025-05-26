@@ -1,0 +1,12 @@
+// Firestore Development Rules - ONLY USE THESE FOR DEVELOPMENT
+// These rules allow full access to your database - NOT SECURE FOR PRODUCTION
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow full access to all documents for development
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+} 

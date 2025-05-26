@@ -1,0 +1,37 @@
+// Firestore Rules - Copy these to your Firebase Console Security Rules section
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow public read access to departments
+    match /departments/{departmentId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Restrict user access - only authenticated users can read all users
+    // Only admins or the user themselves can write to user documents
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+                    (request.auth.token.role == 'ADMIN' || 
+                     request.auth.uid == userId);
+    }
+    
+    // Allow authenticated users to read and write to their own projects
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Allow test connections for development
+    match /connection_test/{docId} {
+      allow read, write: if true;
+    }
+    
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+} 

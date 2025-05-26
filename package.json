@@ -1,0 +1,51 @@
+{
+  "name": "project-management-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:safe": "cross-env NEXT_TELEMETRY_DISABLED=1 next dev --no-trace",
+    "dev:notrace": "cross-env NEXT_TELEMETRY_DISABLED=1 next dev",
+    "dev:fix": "cross-env NODE_OPTIONS=--no-warnings NEXT_TELEMETRY_DISABLED=1 NEXT_DISABLE_SOURCEMAPS=1 next dev",
+    "dev:tracing": "cross-env PRISMA_ENABLE_TRACING=false NODE_OPTIONS=--no-warnings NEXT_TELEMETRY_DISABLED=1 NEXT_DISABLE_SOURCEMAPS=1 next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "clean": "rimraf .next",
+    "dev:clean": "npm run clean && npm run dev:fix",
+    "setup": "npm install && npm run dev",
+    "seed:firebase": "node scripts/seed-firebase.js && node scripts/seed-users-firebase.js"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "bcryptjs": "^2.4.3",
+    "chart.js": "^4.4.9",
+    "clsx": "^2.1.1",
+    "firebase": "^10.8.0",
+    "next": "15.3.2",
+    "next-auth": "^4.24.5",
+    "react": "^18",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^18",
+    "react-hot-toast": "^2.5.2",
+    "react-icons": "^4.12.0",
+    "tailwind-merge": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-beautiful-dnd": "^13.1.8",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.21",
+    "cross-env": "^7.0.3",
+    "eslint": "^8",
+    "eslint-config-next": "15.3.2",
+    "postcss": "^8",
+    "rimraf": "^5.0.10",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "5.8.3"
+  }
+}
