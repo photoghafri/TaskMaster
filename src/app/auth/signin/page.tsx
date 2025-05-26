@@ -29,6 +29,7 @@ function SignInForm() {
     const password = formData.get('password') as string;
 
     try {
+      console.log('Attempting sign in with:', email);
       const result = await signIn('credentials', {
         email,
         password,
@@ -36,15 +37,22 @@ function SignInForm() {
         callbackUrl,
       });
 
+      console.log('Sign in result:', result);
+
       if (result?.error) {
-        setError('Invalid email or password');
-      } else {
+        console.log('Sign in error:', result.error);
+        setError('Invalid email or password. Please check your credentials and try again.');
+      } else if (result?.ok) {
+        console.log('Sign in successful, redirecting...');
         router.push(callbackUrl);
         router.refresh();
+      } else {
+        console.log('Unexpected result:', result);
+        setError('Authentication failed. Please try again.');
       }
     } catch (error) {
-      setError('An error occurred. Please try again.');
       console.error('Sign in error:', error);
+      setError('An error occurred during authentication. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -157,17 +165,24 @@ function SignInForm() {
                 <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <h4 className="text-sm font-semibold text-blue-900">Staff Login Instructions</h4>
+                <h4 className="text-sm font-semibold text-blue-900">Test Login Credentials</h4>
               </div>
-              <div className="text-sm text-blue-800">
-                <p className="mb-2">Use your company email address and the standard password:</p>
+              <div className="text-sm text-blue-800 space-y-3">
                 <div className="bg-white/50 rounded-lg p-3 border border-blue-200">
-                  <p><strong>Email:</strong> yourname@omanairports.com</p>
-                  <p><strong>Password:</strong> password123</p>
+                  <p><strong>AOPS Admin:</strong></p>
+                  <p>Email: AOPS@omanairports.com</p>
+                  <p>Password: password</p>
                 </div>
-                <p className="mt-2 text-xs text-blue-700">
-                  Example: mohammed.alghafri@omanairports.com
-                </p>
+                <div className="bg-white/50 rounded-lg p-3 border border-blue-200">
+                  <p><strong>Test User:</strong></p>
+                  <p>Email: youremail@omanairports.com</p>
+                  <p>Password: password123</p>
+                </div>
+                <div className="bg-white/50 rounded-lg p-3 border border-blue-200">
+                  <p><strong>Admin:</strong></p>
+                  <p>Email: admin@example.com</p>
+                  <p>Password: password</p>
+                </div>
               </div>
             </div>
 
