@@ -41,9 +41,15 @@ export async function middleware(request: NextRequest) {
     } else {
       // For non-API routes, redirect unauthenticated users to signin
       if (!token) {
-        const signInUrl = new URL('/auth/signin', request.url);
-        signInUrl.searchParams.set('callbackUrl', request.url);
-        return NextResponse.redirect(signInUrl);
+        try {
+          const signInUrl = new URL('/auth/signin', request.url);
+          signInUrl.searchParams.set('callbackUrl', request.nextUrl.pathname);
+          return NextResponse.redirect(signInUrl);
+        } catch (urlError) {
+          console.error('URL construction error:', urlError);
+          // Fallback redirect without callback URL
+          return NextResponse.redirect(new URL('/auth/signin', request.url));
+        }
       }
     }
 

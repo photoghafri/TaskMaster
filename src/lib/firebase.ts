@@ -33,8 +33,8 @@ const storage = getStorage(app);
 
 // Initialize Analytics only in browser environment and when supported
 let analytics = null;
-if (typeof window !== 'undefined') {
-  // Only initialize analytics in the browser
+if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
+  // Only initialize analytics in the browser and in production
   isSupported().then((supported) => {
     if (supported) {
       analytics = getAnalytics(app);

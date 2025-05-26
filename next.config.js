@@ -11,6 +11,11 @@ const nextConfig = {
   // Optimize for Vercel deployment
   poweredByHeader: false,
   compress: true,
+  // Handle build errors gracefully
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
   // Reduce bundle size
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -22,6 +27,14 @@ const nextConfig = {
       };
     }
     return config;
+  },
+  // Handle TypeScript errors during build
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  // Handle ESLint errors during build
+  eslint: {
+    ignoreDuringBuilds: false,
   },
 };
 
