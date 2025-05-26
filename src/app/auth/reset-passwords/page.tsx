@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { db } from '../../../lib/firebase';
 import bcrypt from 'bcryptjs';
 
 interface FirestoreUser {
@@ -36,7 +36,7 @@ export default function ResetPasswordsPage() {
       setMessage('Loading users from Firestore...');
       const usersRef = collection(db, 'users');
       const snapshot = await getDocs(usersRef);
-      
+
       const users: FirestoreUser[] = [];
       snapshot.forEach((doc) => {
         const data = doc.data();
@@ -69,33 +69,33 @@ export default function ResetPasswordsPage() {
 
     setStatus('resetting');
     setMessage('Resetting passwords...');
-    
+
     const results: ResetResult[] = [];
-    
+
     for (const user of firestoreUsers) {
       setCurrentUser(`Resetting password for ${user.name} (${user.email})`);
-      
+
       try {
         // Hash the new password
         const hashedPassword = await bcrypt.hash(defaultPassword, 10);
-        
+
         // Update password in Firestore
         const userRef = doc(db, 'users', user.id);
         await updateDoc(userRef, {
           password: hashedPassword,
           updatedAt: new Date().toISOString()
         });
-        
+
         results.push({
           email: user.email,
           name: user.name,
           status: 'success',
           message: `Password reset to: ${defaultPassword}`
         });
-        
+
         // Small delay to avoid overwhelming the database
         await new Promise(resolve => setTimeout(resolve, 200));
-        
+
       } catch (error: any) {
         results.push({
           email: user.email,
@@ -105,14 +105,14 @@ export default function ResetPasswordsPage() {
         });
       }
     }
-    
+
     setResetResults(results);
     setCurrentUser('');
     setStatus('completed');
-    
+
     const successCount = results.filter(r => r.status === 'success').length;
     const errorCount = results.filter(r => r.status === 'error').length;
-    
+
     setMessage(`Password reset completed: ${successCount} successful, ${errorCount} errors`);
   };
 
@@ -153,7 +153,7 @@ export default function ResetPasswordsPage() {
           <div className="space-y-6">
             <div className="bg-blue-50 border border-blue-200 p-4 rounded-md">
               <p className="text-blue-800 text-sm font-medium mb-3">Found {firestoreUsers.length} users</p>
-              
+
               <div className="space-y-4">
                 <div>
                   <label htmlFor="defaultPassword" className="block text-sm font-medium text-gray-700 mb-2">

@@ -1,14 +1,14 @@
-import { db } from '@/lib/firebase';
-import { 
-  collection, 
-  doc, 
-  getDocs, 
-  getDoc, 
-  addDoc, 
-  updateDoc, 
-  deleteDoc, 
-  query, 
-  where, 
+import { db } from '../lib/firebase';
+import {
+  collection,
+  doc,
+  getDocs,
+  getDoc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
   serverTimestamp,
   DocumentData,
   QueryDocumentSnapshot
@@ -35,11 +35,11 @@ export interface DepartmentWithStats extends Department {
 const departmentConverter = {
   fromFirestore(snapshot: QueryDocumentSnapshot): Department {
     const data = snapshot.data();
-    
+
     // Handle Firestore timestamps
     let createdAt = new Date();
     let updatedAt = new Date();
-    
+
     if (data.createdAt) {
       if (typeof data.createdAt.toDate === 'function') {
         createdAt = data.createdAt.toDate();
@@ -47,7 +47,7 @@ const departmentConverter = {
         createdAt = new Date(data.createdAt.seconds * 1000);
       }
     }
-    
+
     if (data.updatedAt) {
       if (typeof data.updatedAt.toDate === 'function') {
         updatedAt = data.updatedAt.toDate();
@@ -55,7 +55,7 @@ const departmentConverter = {
         updatedAt = new Date(data.updatedAt.seconds * 1000);
       }
     }
-    
+
     return {
       id: snapshot.id,
       name: data.name,
@@ -82,27 +82,27 @@ const departmentsCollection = collection(db, 'departments');
 export async function getAllDepartments(): Promise<DepartmentWithStats[]> {
   try {
     const snapshot = await getDocs(departmentsCollection);
-    
+
     // Get all departments
     const departments = snapshot.docs.map(doc => departmentConverter.fromFirestore(doc));
-    
+
     // For each department, get related counts
     const departmentsWithStats = await Promise.all(departments.map(async (dept) => {
       // Get users in department
       const usersQuery = query(collection(db, 'users'), where('departmentId', '==', dept.id));
       const usersSnapshot = await getDocs(usersQuery);
-      
+
       // Get projects in department
       const projectsQuery = query(collection(db, 'projects'), where('departmentId', '==', dept.id));
       const projectsSnapshot = await getDocs(projectsQuery);
-      
+
       // Calculate total budget from projects
       let totalBudget = 0;
       projectsSnapshot.docs.forEach(doc => {
         const projectData = doc.data();
         totalBudget += projectData.budget || 0;
       });
-      
+
       // Return department with stats
       return {
         ...dept,
@@ -111,7 +111,7 @@ export async function getAllDepartments(): Promise<DepartmentWithStats[]> {
         totalBudget
       };
     }));
-    
+
     return departmentsWithStats;
   } catch (error) {
     console.error('Error getting departments:', error);
@@ -124,11 +124,11 @@ export async function getDepartmentById(id: string): Promise<Department | null> 
   try {
     const docRef = doc(db, 'departments', id);
     const snapshot = await getDoc(docRef);
-    
+
     if (!snapshot.exists()) {
       return null;
     }
-    
+
     return departmentConverter.fromFirestore(snapshot as QueryDocumentSnapshot);
   } catch (error) {
     console.error(`Error getting department ${id}:`, error);
@@ -144,10 +144,10 @@ export async function createDepartment(departmentData: Omit<Department, 'id' | '
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     };
-    
+
     const docRef = await addDoc(departmentsCollection, data);
     const newDoc = await getDoc(docRef);
-    
+
     return departmentConverter.fromFirestore(newDoc as QueryDocumentSnapshot);
   } catch (error) {
     console.error('Error creating department:', error);
@@ -159,22 +159,22 @@ export async function createDepartment(departmentData: Omit<Department, 'id' | '
 export async function updateDepartment(id: string, departmentData: Partial<Department>): Promise<Department> {
   try {
     const docRef = doc(db, 'departments', id);
-    
+
     // Add updatedAt timestamp
     const data = {
       ...departmentData,
       updatedAt: serverTimestamp()
     };
-    
+
     await updateDoc(docRef, data);
-    
+
     // Get updated document
     const updatedDoc = await getDoc(docRef);
-    
+
     if (!updatedDoc.exists()) {
       throw new Error(`Department with ID ${id} not found`);
     }
-    
+
     return departmentConverter.fromFirestore(updatedDoc as QueryDocumentSnapshot);
   } catch (error) {
     console.error(`Error updating department ${id}:`, error);
@@ -188,18 +188,18 @@ export async function deleteDepartment(id: string): Promise<void> {
     // Check if department has any users or projects
     const usersQuery = query(collection(db, 'users'), where('departmentId', '==', id));
     const usersSnapshot = await getDocs(usersQuery);
-    
+
     if (!usersSnapshot.empty) {
       throw new Error('Cannot delete department with associated users');
     }
-    
+
     const projectsQuery = query(collection(db, 'projects'), where('departmentId', '==', id));
     const projectsSnapshot = await getDocs(projectsQuery);
-    
+
     if (!projectsSnapshot.empty) {
       throw new Error('Cannot delete department with associated projects');
     }
-    
+
     // Delete the department
     await deleteDoc(doc(db, 'departments', id));
   } catch (error) {
@@ -213,19 +213,19 @@ export async function departmentNameExists(name: string, excludeId?: string): Pr
   try {
     const q = query(departmentsCollection, where('name', '==', name));
     const snapshot = await getDocs(q);
-    
+
     if (snapshot.empty) {
       return false;
     }
-    
+
     // If we're checking for an update operation, exclude the current department
     if (excludeId) {
       return snapshot.docs.some(doc => doc.id !== excludeId);
     }
-    
+
     return true;
   } catch (error) {
     console.error(`Error checking if department name ${name} exists:`, error);
     throw error;
   }
-} 
+}

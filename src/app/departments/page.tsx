@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import AppLayout from '@/components/AppLayout';
+import AppLayout from '../../components/AppLayout';
 import {
   UserGroupIcon,
   DocumentTextIcon,
@@ -11,9 +11,9 @@ import {
   TrashIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
-import { DepartmentWithStats } from '@/services/departmentService';
-import { formatDate } from '@/utils/dateUtils';
-import AuthWrapper from '@/components/AuthWrapper';
+import { DepartmentWithStats } from '../../services/departmentService';
+import { formatDate } from '../../utils/dateUtils';
+import AuthWrapper from '../../components/AuthWrapper';
 
 interface DepartmentFormData {
   id?: string;

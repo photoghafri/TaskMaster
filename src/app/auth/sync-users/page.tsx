@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
-import { auth, db } from '@/lib/firebase';
+import { auth, db } from '../../../lib/firebase';
 
 interface FirestoreUser {
   id: string;
@@ -38,7 +38,7 @@ export default function SyncUsersPage() {
       setMessage('Loading users from Firestore...');
       const usersRef = collection(db, 'users');
       const snapshot = await getDocs(usersRef);
-      
+
       const users: FirestoreUser[] = [];
       snapshot.forEach((doc) => {
         const data = doc.data();
@@ -58,7 +58,7 @@ export default function SyncUsersPage() {
       setFirestoreUsers(users);
       setMessage(`Found ${users.length} users in Firestore`);
       setStatus('syncing');
-      
+
       // Start syncing automatically
       await syncUsersToAuth(users);
     } catch (error) {
@@ -71,27 +71,27 @@ export default function SyncUsersPage() {
   // Sync users to Firebase Authentication
   const syncUsersToAuth = async (users: FirestoreUser[]) => {
     const results: SyncResult[] = [];
-    
+
     for (const user of users) {
       setCurrentUser(`Syncing ${user.name} (${user.email})`);
-      
+
       try {
         // Default password for all users (you can change this)
         const defaultPassword = 'password123';
-        
+
         // Try to create user in Firebase Auth
         await createUserWithEmailAndPassword(auth, user.email, defaultPassword);
-        
+
         results.push({
           email: user.email,
           name: user.name,
           status: 'success',
           message: `Created with password: ${defaultPassword}`
         });
-        
+
         // Small delay to avoid rate limiting
         await new Promise(resolve => setTimeout(resolve, 500));
-        
+
       } catch (error: any) {
         if (error.code === 'auth/email-already-in-use') {
           results.push({
@@ -110,15 +110,15 @@ export default function SyncUsersPage() {
         }
       }
     }
-    
+
     setSyncResults(results);
     setCurrentUser('');
     setStatus('completed');
-    
+
     const successCount = results.filter(r => r.status === 'success').length;
     const existsCount = results.filter(r => r.status === 'exists').length;
     const errorCount = results.filter(r => r.status === 'error').length;
-    
+
     setMessage(`Sync completed: ${successCount} created, ${existsCount} already existed, ${errorCount} errors`);
   };
 

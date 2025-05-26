@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSession } from 'next-auth/react';
-import { 
-  BellIcon, 
-  CheckCircleIcon, 
+import {
+  BellIcon,
+  CheckCircleIcon,
   ExclamationCircleIcon,
   InformationCircleIcon,
   XMarkIcon,
@@ -10,7 +10,7 @@ import {
   ArrowPathIcon
 } from '@heroicons/react/24/outline';
 import { BellAlertIcon } from '@heroicons/react/24/solid';
-import { getNotifications, markAsRead, markAllAsRead, countUnread, Notification } from '@/lib/notification-utils';
+import { getNotifications, markAsRead, markAllAsRead, countUnread, Notification } from '../lib/notification-utils';
 
 export default function NotificationCenter() {
   const { data: session } = useSession();
@@ -95,30 +95,30 @@ export default function NotificationCenter() {
   const formatTimestamp = (date: Date) => {
     const now = new Date();
     const diff = now.getTime() - new Date(date).getTime();
-    
+
     // Less than a minute
     if (diff < 60000) {
       return 'Just now';
     }
-    
+
     // Less than an hour
     if (diff < 3600000) {
       const minutes = Math.floor(diff / 60000);
       return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
     }
-    
+
     // Less than a day
     if (diff < 86400000) {
       const hours = Math.floor(diff / 3600000);
       return `${hours} hour${hours > 1 ? 's' : ''} ago`;
     }
-    
+
     // Less than a week
     if (diff < 604800000) {
       const days = Math.floor(diff / 86400000);
       return `${days} day${days > 1 ? 's' : ''} ago`;
     }
-    
+
     // Format as date
     return new Date(date).toLocaleDateString(undefined, {
       month: 'short',
@@ -153,7 +153,7 @@ export default function NotificationCenter() {
             <h3 className="font-medium text-slate-900 dark:text-white">Notifications</h3>
             <div className="flex space-x-1">
               {unreadCount > 0 && (
-                <button 
+                <button
                   onClick={handleMarkAllAsRead}
                   className="p-1 rounded text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 flex items-center space-x-1"
                   title="Mark all as read"
@@ -162,7 +162,7 @@ export default function NotificationCenter() {
                   <span>Mark all read</span>
                 </button>
               )}
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="p-1 rounded text-slate-500 hover:text-slate-700 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700"
                 title="Close"
@@ -171,13 +171,13 @@ export default function NotificationCenter() {
               </button>
             </div>
           </div>
-          
+
           <div className="max-h-96 overflow-y-auto">
             {notifications.length > 0 ? (
               <div className="divide-y divide-slate-200 dark:divide-slate-700">
                 {notifications.map(notification => (
-                  <div 
-                    key={notification.id} 
+                  <div
+                    key={notification.id}
                     className={`p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-start space-x-3 transition-colors ${!notification.read ? 'bg-blue-50 dark:bg-blue-900/10' : ''}`}
                   >
                     <div className="flex-shrink-0 mt-0.5">
@@ -222,7 +222,7 @@ export default function NotificationCenter() {
               </div>
             )}
           </div>
-          
+
           <div className="border-t border-slate-200 dark:border-slate-700 p-3 flex justify-center">
             <button
               onClick={() => {
@@ -241,4 +241,4 @@ export default function NotificationCenter() {
       )}
     </div>
   );
-} 
+}

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createProject } from '@/services/projectService';
-import { logProjectCreation } from '@/services/projectLogService';
+import { createProject } from '../../../../services/projectService';
+import { logProjectCreation } from '../../../../services/projectLogService';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { authOptions } from '../../../../lib/auth';
 
 // POST /api/projects/bulk-import - Import multiple projects at once
 export async function POST(request: NextRequest) {

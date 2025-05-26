@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getActiveProjects } from '@/services/projectService';
+import { getActiveProjects } from '../../../../services/projectService';
 
 // GET /api/projects/active - Get all active (non-archived) projects
 export async function GET() {

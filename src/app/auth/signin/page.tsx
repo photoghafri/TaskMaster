@@ -44,8 +44,8 @@ function SignInForm() {
         setError('Invalid email or password. Please check your credentials and try again.');
       } else if (result?.ok) {
         console.log('Sign in successful, redirecting...');
-        router.push(callbackUrl);
-        router.refresh();
+        // Force a hard redirect to ensure proper navigation
+        window.location.href = callbackUrl;
       } else {
         console.log('Unexpected result:', result);
         setError('Authentication failed. Please try again.');
