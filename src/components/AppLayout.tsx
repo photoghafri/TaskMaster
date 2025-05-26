@@ -72,7 +72,7 @@ export default function AppLayout({ children, title }: AppLayoutProps) {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Toaster position="bottom-right" />
       <div className="flex flex-col h-screen">
-        <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10">
+        <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex">
@@ -125,7 +125,7 @@ export default function AppLayout({ children, title }: AppLayoutProps) {
                   </button>
 
                   {userMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 rounded-md bg-white dark:bg-slate-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-[9999]">
+                    <div className="fixed right-4 top-16 w-48 rounded-md bg-white dark:bg-slate-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-[9999]">
                       <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700">
                         <p className="text-sm font-medium text-slate-900 dark:text-white">
                           {session?.user?.name || 'User'}
