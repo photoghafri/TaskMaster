@@ -1,24 +1,25 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp, getApps } from "firebase/app";
+import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
+import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAkGE-lbEzcRVJZbKjE_SHJd38jENqut8k",
-  authDomain: "project-management-f45cc.firebaseapp.com",
-  projectId: "project-management-f45cc",
-  storageBucket: "project-management-f45cc.firebasestorage.app",
-  messagingSenderId: "1002222709659",
-  appId: "1:1002222709659:web:6b1ab479efcc4102824f3e",
-  measurementId: "G-JYYNYZV8LP"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyAkGE-lbEzcRVJZbKjE_SHJd38jENqut8k",
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "project-management-f45cc.firebaseapp.com",
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "project-management-f45cc",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "project-management-f45cc.firebasestorage.app",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "1002222709659",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:1002222709659:web:6b1ab479efcc4102824f3e",
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || "G-JYYNYZV8LP"
 };
 
 // Initialize Firebase only if we don't already have an instance
 // This helps prevent multiple initializations during SSR/SSG
-let app;
+let app: FirebaseApp;
 if (!getApps().length) {
   app = initializeApp(firebaseConfig);
 } else {
@@ -30,7 +31,17 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 
-// Analytics is now null by default
-const analytics = null;
+// Initialize Analytics only in browser environment and when supported
+let analytics = null;
+if (typeof window !== 'undefined') {
+  // Only initialize analytics in the browser
+  isSupported().then((supported) => {
+    if (supported) {
+      analytics = getAnalytics(app);
+    }
+  }).catch((error) => {
+    console.warn('Firebase Analytics not supported:', error);
+  });
+}
 
-export { app, db, auth, storage, analytics }; 
+export { app, db, auth, storage, analytics };
