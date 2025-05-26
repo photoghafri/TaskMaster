@@ -1,29 +1,29 @@
-import { db } from '@/lib/firebase';
-import { 
-  collection, 
-  doc, 
-  getDocs, 
-  addDoc, 
-  query, 
-  where, 
-  orderBy, 
+import { db } from '../lib/firebase';
+import {
+  collection,
+  doc,
+  getDocs,
+  addDoc,
+  query,
+  where,
+  orderBy,
   serverTimestamp,
   DocumentData,
   QueryDocumentSnapshot,
   deleteDoc
 } from 'firebase/firestore';
-import { formatDate } from '@/utils/dateUtils';
+import { formatDate } from '../utils/dateUtils';
 
 // Local implementation of toJsDate
 function toJsDate(date: any): Date | null {
   if (!date) return null;
-  
+
   try {
     // Already a Date object
     if (date instanceof Date) {
       return date;
     }
-    
+
     // String date (ISO format or other string representation)
     if (typeof date === 'string') {
       // Handle ISO dates
@@ -33,29 +33,29 @@ function toJsDate(date: any): Date | null {
           return parsedDate;
         }
       }
-      
+
       // Try to parse as a date anyway
       const parsedDate = new Date(date);
       if (!isNaN(parsedDate.getTime())) {
         return parsedDate;
       }
     }
-    
+
     // Numeric timestamp (milliseconds since epoch)
     if (typeof date === 'number') {
       return new Date(date);
     }
-    
+
     // Firebase Timestamp with toDate() method
     if (date && typeof date === 'object' && 'toDate' in date && typeof date.toDate === 'function') {
       return date.toDate();
     }
-    
+
     // Firebase Timestamp-like object with seconds and nanoseconds
     if (date && typeof date === 'object' && 'seconds' in date) {
       return new Date(date.seconds * 1000);
     }
-    
+
     // Stringified object that might contain a timestamp
     if (typeof date === 'string' && (date.includes('"seconds"') || date.includes('"nanoseconds"'))) {
       try {
@@ -68,7 +68,7 @@ function toJsDate(date: any): Date | null {
   } catch (error) {
     console.error('Error converting to JS Date:', error);
   }
-  
+
   return null;
 }
 
@@ -89,7 +89,7 @@ export interface ProjectLog {
 const projectLogConverter = {
   fromFirestore(snapshot: QueryDocumentSnapshot): ProjectLog {
     const data = snapshot.data();
-    
+
     // Ensure we have a valid date for createdAt
     let createdAt = new Date();
     try {
@@ -102,7 +102,7 @@ const projectLogConverter = {
     } catch (error) {
       console.warn(`Error converting createdAt for log ${snapshot.id}:`, error);
     }
-    
+
     // Ensure changes is a properly structured object
     let changes = {};
     try {
@@ -113,16 +113,16 @@ const projectLogConverter = {
             // Handle Firebase Timestamp objects in from/to values
             let fromValue = change.from;
             let toValue = change.to;
-            
+
             // Don't convert Firebase timestamps to avoid issues
             if (typeof fromValue === 'object' && fromValue !== null && 'seconds' in fromValue) {
               // Keep as is
             }
-            
+
             if (typeof toValue === 'object' && toValue !== null && 'seconds' in toValue) {
               // Keep as is
             }
-            
+
             acc[key] = {
               from: fromValue !== undefined ? fromValue : '',
               to: toValue !== undefined ? toValue : ''
@@ -134,7 +134,7 @@ const projectLogConverter = {
     } catch (error) {
       console.warn(`Error processing changes for log ${snapshot.id}:`, error);
     }
-    
+
     return {
       id: snapshot.id,
       projectId: data.projectId || '',
@@ -184,16 +184,16 @@ export async function createProjectLog(logData: Omit<ProjectLog, 'id' | 'created
 
     // Ensure changes is an object
     const changes = logData.changes || {};
-    
+
     // Ensure dates are properly converted
     const data = projectLogConverter.toFirestore({
       ...logData,
       changes
     });
-    
+
     const docRef = await addDoc(projectLogsCollection, data);
     console.log('Log created with ID:', docRef.id);
-    
+
     // Return the created log (we'll simulate the timestamp for immediate return)
     return {
       ...logData,
@@ -210,7 +210,7 @@ export async function createProjectLog(logData: Omit<ProjectLog, 'id' | 'created
 export async function getProjectLogs(projectId: string): Promise<ProjectLog[]> {
   try {
     console.log('Fetching logs for project ID:', projectId);
-    
+
     // First try with a simpler query that doesn't require a composite index
     try {
       const simpleQuery = query(
@@ -219,13 +219,13 @@ export async function getProjectLogs(projectId: string): Promise<ProjectLog[]> {
       );
       const snapshot = await getDocs(simpleQuery);
       console.log(`Found ${snapshot.docs.length} logs for project ${projectId}`);
-      
+
       // Convert and sort on the client side
       const logs = snapshot.docs.map(doc => projectLogConverter.fromFirestore(doc));
       return logs.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     } catch (simpleQueryError) {
       console.warn('Simple query failed, attempting with composite index:', simpleQueryError);
-      
+
       // Fall back to the original query with orderBy which requires a composite index
       const q = query(
         projectLogsCollection,
@@ -238,13 +238,13 @@ export async function getProjectLogs(projectId: string): Promise<ProjectLog[]> {
     }
   } catch (error) {
     console.error(`Error getting logs for project ${projectId}:`, error);
-    
+
     // Enhanced error handling for index errors
     if (error instanceof Error && error.message.includes('index')) {
       console.error('Index error detected. Please create the required Firestore index by following the link in the error message above.');
       console.error('After creating the index, it may take a few minutes to become active.');
     }
-    
+
     throw error;
   }
 }
@@ -285,7 +285,7 @@ export async function logStatusChange(
       createdBy: userId,
       createdByName: userName
     };
-    
+
     return createProjectLog(logData);
   } catch (error) {
     console.error(`Error logging status change for project ${projectId}:`, error);
@@ -313,7 +313,7 @@ export async function logSubStatusChange(
       createdBy: userId,
       createdByName: userName
     };
-    
+
     return createProjectLog(logData);
   } catch (error) {
     console.error(`Error logging sub-status change for project ${projectId}:`, error);
@@ -338,7 +338,7 @@ export async function logProjectCreation(
       createdBy: userId,
       createdByName: userName
     };
-    
+
     return createProjectLog(logData);
   } catch (error) {
     console.error(`Error logging project creation for ${projectId}:`, error);
@@ -364,7 +364,7 @@ export async function logProjectUpdate(
       createdBy: userId,
       createdByName: userName
     };
-    
+
     return createProjectLog(logData);
   } catch (error) {
     console.error(`Error logging project update for ${projectId}:`, error);
@@ -390,18 +390,18 @@ export async function deleteProjectLog(logId: string): Promise<boolean> {
 export async function deleteAllProjectLogs(projectId: string): Promise<number> {
   try {
     console.log(`Deleting all logs for project ID: ${projectId}`);
-    
+
     // Get all logs for the project
     const logs = await getProjectLogs(projectId);
-    
+
     // Delete each log
     const deletePromises = logs.map(log => deleteProjectLog(log.id));
     await Promise.all(deletePromises);
-    
+
     console.log(`Deleted ${logs.length} logs for project ${projectId}`);
     return logs.length;
   } catch (error) {
     console.error(`Error deleting all logs for project ${projectId}:`, error);
     throw error;
   }
-} 
+}

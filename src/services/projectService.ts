@@ -1,4 +1,4 @@
-import { db } from '@/lib/firebase';
+import { db } from '../lib/firebase';
 import {
   collection,
   doc,
@@ -14,7 +14,7 @@ import {
   QueryDocumentSnapshot,
   orderBy
 } from 'firebase/firestore';
-import { formatDate } from '@/utils/dateUtils';
+import { formatDate } from '../utils/dateUtils';
 
 // Define our own toJsDate function to prevent dependency issues
 function toJsDate(date: any): Date | null {

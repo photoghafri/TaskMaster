@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllProjects, createProject } from '@/services/projectService';
-import { logProjectCreation } from '@/services/projectLogService';
+import { getAllProjects, createProject } from '../../../services/projectService';
+import { logProjectCreation } from '../../../services/projectLogService';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { authOptions } from '../../../lib/auth';
 
 // GET /api/projects - Get all projects
 export async function GET() {

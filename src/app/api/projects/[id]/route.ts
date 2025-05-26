@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getProjectById, updateProject, deleteProject } from '@/services/projectService';
-import { logStatusChange, logSubStatusChange, logProjectUpdate } from '@/services/projectLogService';
+import { getProjectById, updateProject, deleteProject } from '../../../../services/projectService';
+import { logStatusChange, logSubStatusChange, logProjectUpdate } from '../../../../services/projectLogService';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { authOptions } from '../../../../lib/auth';
 
 // GET /api/projects/[id] - Get a specific project
 export async function GET(
