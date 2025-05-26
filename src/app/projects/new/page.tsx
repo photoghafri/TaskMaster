@@ -1,5 +1,5 @@
-import AppLayout from '@/components/AppLayout';
-import ProjectForm from '@/components/ProjectForm';
+import AppLayout from '../../../components/AppLayout';
+import ProjectForm from '../../../components/ProjectForm';
 
 export default function NewProjectPage() {
   return (
@@ -7,4 +7,4 @@ export default function NewProjectPage() {
       <ProjectForm />
     </AppLayout>
   );
-} 
+}

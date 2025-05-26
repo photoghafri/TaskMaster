@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import AppLayout from '@/components/AppLayout';
-import AuthWrapper from '@/components/AuthWrapper';
+import AppLayout from '../../components/AppLayout';
+import AuthWrapper from '../../components/AuthWrapper';
 import {
   MapPinIcon,
   PlusIcon,

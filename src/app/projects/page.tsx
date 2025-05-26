@@ -3,11 +3,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import AppLayout from '@/components/AppLayout';
-import ProjectForm from '@/components/ProjectForm';
-import AdvancedFilters from '@/components/AdvancedFilters';
-import AuthWrapper from '@/components/AuthWrapper';
-import ConfirmationModal from '@/components/ConfirmationModal';
+import AppLayout from '../../components/AppLayout';
+import ProjectForm from '../../components/ProjectForm';
+import AdvancedFilters from '../../components/AdvancedFilters';
+import AuthWrapper from '../../components/AuthWrapper';
+import ConfirmationModal from '../../components/ConfirmationModal';
 import {
   PlusIcon,
   FunnelIcon,

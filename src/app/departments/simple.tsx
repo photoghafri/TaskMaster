@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from 'react';
-import AppLayout from '@/components/AppLayout';
-import { 
-  UserGroupIcon, 
-  DocumentTextIcon, 
+import AppLayout from '../../components/AppLayout';
+import {
+  UserGroupIcon,
+  DocumentTextIcon,
   CurrencyDollarIcon
 } from '@heroicons/react/24/outline';
 
@@ -117,7 +117,7 @@ export default function SimpleDepartmentsPage() {
       'from-red-500 to-red-600',
       'from-sky-500 to-sky-600',
     ];
-    
+
     // Create a simple hash from the department name
     const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     return colors[hash % colors.length];
@@ -132,7 +132,7 @@ export default function SimpleDepartmentsPage() {
             <p className="text-sm text-slate-500 mt-1">Showing {departments.length} departments</p>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {departments.map((dept) => (
             <div key={dept.id} className="bg-white rounded-xl shadow-sm border border-slate-200/60 overflow-hidden hover:shadow-md transition-shadow duration-300">
@@ -141,11 +141,11 @@ export default function SimpleDepartmentsPage() {
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-lg font-semibold text-slate-900">{dept.name}</h3>
                 </div>
-                
+
                 {dept.description && (
                   <p className="text-sm text-slate-600 mb-4 line-clamp-2">{dept.description}</p>
                 )}
-                
+
                 <div className="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200">
                   <div className="text-center">
                     <div className="flex items-center justify-center mb-1">
@@ -154,7 +154,7 @@ export default function SimpleDepartmentsPage() {
                     </div>
                     <p className="text-xs text-slate-500">Members</p>
                   </div>
-                  
+
                   <div className="text-center">
                     <div className="flex items-center justify-center mb-1">
                       <DocumentTextIcon className="h-4 w-4 text-slate-400 mr-1" />
@@ -162,7 +162,7 @@ export default function SimpleDepartmentsPage() {
                     </div>
                     <p className="text-xs text-slate-500">Projects</p>
                   </div>
-                  
+
                   <div className="text-center">
                     <div className="flex items-center justify-center mb-1">
                       <CurrencyDollarIcon className="h-4 w-4 text-slate-400 mr-1" />
@@ -178,4 +178,4 @@ export default function SimpleDepartmentsPage() {
       </div>
     </AppLayout>
   );
-} 
+}

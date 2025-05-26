@@ -1,8 +1,8 @@
 'use client';
 
-import AppLayout from '@/components/AppLayout';
-import AuthWrapper from '@/components/AuthWrapper';
-import EnhancedActivityLogs from '@/components/EnhancedActivityLogs';
+import AppLayout from '../../components/AppLayout';
+import AuthWrapper from '../../components/AuthWrapper';
+import EnhancedActivityLogs from '../../components/EnhancedActivityLogs';
 
 
 

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import AppLayout from '@/components/AppLayout';
+import AppLayout from '../../../components/AppLayout';
 import { PencilIcon, TrashIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 
 interface Project {
@@ -262,4 +262,4 @@ export default function ProjectDetail() {
       </div>
     </AppLayout>
   );
-} 
+}

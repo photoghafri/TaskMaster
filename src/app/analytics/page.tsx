@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AppLayout from '@/components/AppLayout';
-import AdvancedAnalytics from '@/components/AdvancedAnalytics';
-import AuthWrapper from '@/components/AuthWrapper';
+import AppLayout from '../../components/AppLayout';
+import AdvancedAnalytics from '../../components/AdvancedAnalytics';
+import AuthWrapper from '../../components/AuthWrapper';
 import { ArrowTrendingUpIcon, ArrowTrendingDownIcon, ChartBarIcon, CurrencyDollarIcon, ClockIcon, UserGroupIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 
 

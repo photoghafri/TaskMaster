@@ -21,9 +21,9 @@ import {
   ArchiveBoxXMarkIcon,
   UserIcon
 } from '@heroicons/react/24/outline';
-import { formatDate, formatPossibleDate, formatCompletionDate } from '@/utils/dateUtils';
+import { formatDate, formatPossibleDate, formatCompletionDate } from '../utils/dateUtils';
 import { toast } from 'react-hot-toast';
-import { notifyPriorityChange, notifyStatusChange } from '@/lib/notification-utils';
+import { notifyPriorityChange, notifyStatusChange } from '../lib/notification-utils';
 import ConfirmationModal from './ConfirmationModal';
 
 interface Project {
