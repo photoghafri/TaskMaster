@@ -137,7 +137,7 @@ function SignInForm() {
       </div>
 
       {/* Right Side - Login Form */}
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-slate-50">
+      <div className="w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-md w-full space-y-8">
           {/* Mobile Logo */}
           <div className="lg:hidden text-center">
