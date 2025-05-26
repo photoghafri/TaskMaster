@@ -25,7 +25,9 @@ export default function ActivityLogsPage() {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    console.log('Logs page mounted');
+    console.log('✅ Logs page mounted successfully!');
+    console.log('Current URL:', window.location.href);
+    console.log('Timestamp:', new Date().toISOString());
   }, []);
 
   if (hasError) {
