@@ -95,38 +95,40 @@ function SignInForm() {
             </div>
 
             {/* Features */}
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold leading-tight text-white">
-                Streamline Your Project Management
-              </h2>
-              <p className="text-white/90 text-lg leading-relaxed">
-                TaskMaster - A comprehensive project management system designed specifically for Oman Airports OPD operations.
-              </p>
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h2 className="text-4xl font-bold leading-tight text-white">
+                  Streamline Your Project Management
+                </h2>
+                <p className="text-white/90 text-xl leading-relaxed">
+                  TaskMaster - A comprehensive project management system designed specifically for Oman Airports OPD operations.
+                </p>
+              </div>
 
               <div className="space-y-4">
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mr-3">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mr-4">
+                    <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90">Real-time project tracking</span>
+                  <span className="text-white/95 text-lg">Real-time project tracking</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mr-3">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mr-4">
+                    <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90">Advanced analytics & reporting</span>
+                  <span className="text-white/95 text-lg">Advanced analytics & reporting</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mr-3">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mr-4">
+                    <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90">Team collaboration tools</span>
+                  <span className="text-white/95 text-lg">Team collaboration tools</span>
                 </div>
               </div>
             </div>
@@ -155,45 +157,50 @@ function SignInForm() {
           {/* Login Card */}
           <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">Welcome Back</h3>
-              <p className="text-slate-600">Sign in to access your dashboard</p>
+              <h3 className="text-3xl font-bold text-slate-900 mb-3">Welcome Back</h3>
+              <p className="text-slate-600 text-lg">Sign in to access your dashboard</p>
             </div>
 
-            {/* Login Instructions */}
-            <div className="mb-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
-              <div className="flex items-center mb-2">
-                <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <h4 className="text-sm font-semibold text-blue-900">Login Credentials</h4>
+            {/* Staff Login Instructions */}
+            <div className="mb-8 p-6 bg-blue-50 rounded-2xl border border-blue-200">
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-semibold text-blue-900">Staff Login Instructions</h4>
               </div>
-              <div className="text-sm text-blue-800 space-y-3">
-                <div className="bg-white/50 rounded-lg p-3 border border-blue-200">
-                  <p><strong>AOPS Admin:</strong></p>
-                  <p>Email: AOPS@omanairports.com</p>
-                  <p>Password: password</p>
+              <p className="text-blue-800 mb-4 leading-relaxed">
+                Use your company email address and the standard password:
+              </p>
+              <div className="bg-white/70 rounded-xl p-4 border border-blue-200">
+                <div className="space-y-2">
+                  <div>
+                    <span className="font-semibold text-blue-900">Email:</span>
+                    <span className="text-blue-700 ml-2">yourname@omanairports.com</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-blue-900">Password:</span>
+                    <span className="text-blue-700 ml-2">password123</span>
+                  </div>
                 </div>
-                <div className="bg-white/50 rounded-lg p-3 border border-blue-200">
-                  <p><strong>Mohammed Al Ghafri:</strong></p>
-                  <p>Email: mohammed.alghafri@omanairports.com</p>
-                  <p>Password: password123</p>
-                </div>
-                <div className="bg-white/50 rounded-lg p-3 border border-blue-200">
-                  <p><strong>Other Staff:</strong></p>
-                  <p>Email: [firstname.lastname]@omanairports.com</p>
-                  <p>Password: password123</p>
+                <div className="mt-3 pt-3 border-t border-blue-200">
+                  <p className="text-sm text-blue-600">
+                    Example: mohammed.alghafri@omanairports.com
+                  </p>
                 </div>
               </div>
             </div>
 
             <form className="space-y-6" onSubmit={handleSubmit}>
-              <div className="space-y-5">
+              <div className="space-y-6">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-3">
                     Email Address
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                       <svg className="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                       </svg>
@@ -204,18 +211,18 @@ function SignInForm() {
                       type="email"
                       autoComplete="email"
                       required
-                      className="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      className="block w-full pl-12 pr-4 py-4 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-base"
                       placeholder="yourname@omanairports.com"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="block text-sm font-semibold text-slate-700 mb-2">
+                  <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-3">
                     Password
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                       <svg className="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                       </svg>
@@ -226,7 +233,7 @@ function SignInForm() {
                       type="password"
                       autoComplete="current-password"
                       required
-                      className="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      className="block w-full pl-12 pr-4 py-4 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-base"
                       placeholder="Enter your password"
                     />
                   </div>
@@ -247,7 +254,7 @@ function SignInForm() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center items-center py-3 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="w-full flex justify-center items-center py-4 px-6 border border-transparent text-base font-semibold rounded-xl text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 {isLoading ? (
                   <>
