@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
   try {
     const token = await getToken({
       req: request,
-      secret: process.env.NEXTAUTH_SECRET || 'your-secret-key-here'
+      secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-key-for-development-only'
     });
 
     // Protect API routes

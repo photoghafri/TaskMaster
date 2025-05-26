@@ -77,8 +77,8 @@ function SignInForm() {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-indigo-900/85 to-purple-900/90"></div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col justify-center items-center px-16 py-12 text-white h-full ml-8">
-          <div className="max-w-lg text-center">
+        <div className="relative z-10 flex flex-col justify-center items-center px-20 py-12 text-white h-full ml-16">
+          <div className="max-w-xl text-center">
             {/* Logo */}
             <div className="flex flex-col items-center text-center mb-8">
               <div className="w-24 h-24 bg-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center mb-4 p-3">

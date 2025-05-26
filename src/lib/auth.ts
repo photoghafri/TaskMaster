@@ -81,7 +81,7 @@ const handleFallbackAuth = (email: string, password: string) => {
 };
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET || 'your-secret-key-here',
+  secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-key-for-development-only',
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -166,5 +166,5 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  debug: true, // Enable debug mode for troubleshooting
+  debug: process.env.NODE_ENV === 'development', // Enable debug mode only in development
 };

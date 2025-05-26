@@ -15,7 +15,9 @@
     "dev:clean": "npm run clean && npm run dev:fix",
     "setup": "npm install && npm run dev",
     "seed:firebase": "node scripts/seed-firebase.js && node scripts/seed-users-firebase.js",
-    "seed:real-users": "node scripts/seed-real-users.js"
+    "seed:real-users": "node scripts/seed-real-users.js",
+    "vercel-build": "next build",
+    "postbuild": "echo 'Build completed successfully'"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.6.0",

@@ -1,0 +1,32 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev",
+  "env": {
+    "NEXTAUTH_SECRET": "@nextauth_secret",
+    "NEXTAUTH_URL": "@nextauth_url",
+    "NEXT_PUBLIC_FIREBASE_API_KEY": "AIzaSyAkGE-lbEzcRVJZbKjE_SHJd38jENqut8k",
+    "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN": "project-management-f45cc.firebaseapp.com",
+    "NEXT_PUBLIC_FIREBASE_PROJECT_ID": "project-management-f45cc",
+    "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET": "project-management-f45cc.firebasestorage.app",
+    "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "1002222709659",
+    "NEXT_PUBLIC_FIREBASE_APP_ID": "1:1002222709659:web:6b1ab479efcc4102824f3e",
+    "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID": "G-JYYNYZV8LP",
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "src/app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+  "regions": ["iad1"],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ]
+}
