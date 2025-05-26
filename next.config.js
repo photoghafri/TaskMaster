@@ -4,6 +4,10 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@heroicons/react', 'react-icons'],
   },
+  // Ensure all pages are properly built for Vercel
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
   images: {
     domains: [],
     unoptimized: false,
