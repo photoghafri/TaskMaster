@@ -14,7 +14,8 @@
     "clean": "rimraf .next",
     "dev:clean": "npm run clean && npm run dev:fix",
     "setup": "npm install && npm run dev",
-    "seed:firebase": "node scripts/seed-firebase.js && node scripts/seed-users-firebase.js"
+    "seed:firebase": "node scripts/seed-firebase.js && node scripts/seed-users-firebase.js",
+    "seed:real-users": "node scripts/seed-real-users.js"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.6.0",

@@ -53,6 +53,21 @@ export default function AppLayout({ children, title }: AppLayoutProps) {
     return pathname === href;
   };
 
+  // Close user menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (userMenuOpen && !target.closest('[data-user-menu]')) {
+        setUserMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [userMenuOpen]);
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Toaster position="bottom-right" />
@@ -87,7 +102,7 @@ export default function AppLayout({ children, title }: AppLayoutProps) {
               <div className="flex items-center space-x-4">
                 <NotificationCenter />
                 <ThemeToggle />
-                <div className="relative">
+                <div className="relative" data-user-menu>
                   <button
                     type="button"
                     className="flex max-w-xs items-center rounded-full bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -110,7 +125,7 @@ export default function AppLayout({ children, title }: AppLayoutProps) {
                   </button>
 
                   {userMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 rounded-md bg-white dark:bg-slate-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5">
+                    <div className="absolute right-0 mt-2 w-48 rounded-md bg-white dark:bg-slate-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
                       <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700">
                         <p className="text-sm font-medium text-slate-900 dark:text-white">
                           {session?.user?.name || 'User'}

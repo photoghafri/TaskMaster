@@ -77,8 +77,8 @@ function SignInForm() {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-indigo-900/85 to-purple-900/90"></div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col justify-center px-12 py-12 text-white">
-          <div className="max-w-md">
+        <div className="relative z-10 flex flex-col justify-center items-center px-12 py-12 text-white h-full">
+          <div className="max-w-md text-center">
             {/* Logo */}
             <div className="flex flex-col items-center text-center mb-8">
               <div className="w-24 h-24 bg-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center mb-4 p-3">
@@ -165,7 +165,7 @@ function SignInForm() {
                 <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <h4 className="text-sm font-semibold text-blue-900">Test Login Credentials</h4>
+                <h4 className="text-sm font-semibold text-blue-900">Login Credentials</h4>
               </div>
               <div className="text-sm text-blue-800 space-y-3">
                 <div className="bg-white/50 rounded-lg p-3 border border-blue-200">
@@ -174,14 +174,14 @@ function SignInForm() {
                   <p>Password: password</p>
                 </div>
                 <div className="bg-white/50 rounded-lg p-3 border border-blue-200">
-                  <p><strong>Test User:</strong></p>
-                  <p>Email: youremail@omanairports.com</p>
+                  <p><strong>Mohammed Al Ghafri:</strong></p>
+                  <p>Email: mohammed.alghafri@omanairports.com</p>
                   <p>Password: password123</p>
                 </div>
                 <div className="bg-white/50 rounded-lg p-3 border border-blue-200">
-                  <p><strong>Admin:</strong></p>
-                  <p>Email: admin@example.com</p>
-                  <p>Password: password</p>
+                  <p><strong>Other Staff:</strong></p>
+                  <p>Email: [firstname.lastname]@omanairports.com</p>
+                  <p>Password: password123</p>
                 </div>
               </div>
             </div>
