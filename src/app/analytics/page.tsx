@@ -24,6 +24,9 @@ interface Project {
   startDate?: string;
   createdAt: string;
   type: string;
+  year: number;
+  area: string;
+  capexOpex: string;
 }
 
 interface Activity {

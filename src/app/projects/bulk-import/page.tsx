@@ -347,10 +347,10 @@ export default function BulkImportPage() {
                 <p>• <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded">note</code> - Additional notes</p>
               </div>
               <p>
-                2. Click the "Load Sample" button to see the expected format.
+                2. Click the &quot;Load Sample&quot; button to see the expected format.
               </p>
               <p>
-                3. Click "Import Projects" to start the import process.
+                3. Click &quot;Import Projects&quot; to start the import process.
               </p>
               <div className="mt-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg">
                 <p className="text-sm text-amber-800 dark:text-amber-200">

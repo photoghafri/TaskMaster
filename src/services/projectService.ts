@@ -339,7 +339,7 @@ export async function searchProjects(searchTerm: string): Promise<Project[]> {
 // Archive project
 export async function archiveProject(id: string, userId: string): Promise<Project> {
   try {
-    const updateData = {
+    const updateData: any = {
       isArchived: true,
       archivedAt: serverTimestamp(),
       archivedBy: userId

@@ -6,13 +6,13 @@ import { authOptions } from '@/lib/auth';
 // GET /api/projects/[id]/logs - Get logs for a specific project
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Get the project ID safely
-    const projectId = params.id;
+    const { id: projectId } = await params;
     console.log(`Fetching logs for project ID: ${projectId}`);
-    
+
     const logs = await getProjectLogs(projectId);
     console.log(`Found ${logs.length} logs for project ${projectId}`);
 
@@ -29,13 +29,13 @@ export async function GET(
 // POST /api/projects/[id]/logs - Create a new log entry for a project
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Get the project ID safely
-    const projectId = params.id;
+    const { id: projectId } = await params;
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user) {
       return NextResponse.json(
         { error: 'Unauthorized' },
@@ -44,7 +44,7 @@ export async function POST(
     }
 
     const data = await request.json();
-    
+
     const logData = {
       projectId,
       action: data.action,
@@ -54,9 +54,9 @@ export async function POST(
       createdBy: session.user.id || '',
       createdByName: session.user.name || ''
     };
-    
+
     const log = await createProjectLog(logData);
-    
+
     return NextResponse.json(log);
   } catch (error) {
     console.error('Error creating project log:', error);
@@ -70,12 +70,12 @@ export async function POST(
 // DELETE /api/projects/[id]/logs - Delete all logs for a project
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check for authentication
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user) {
       return NextResponse.json(
         { error: 'Unauthorized. You must be logged in to delete logs.' },
@@ -84,25 +84,25 @@ export async function DELETE(
     }
 
     // Get the project ID safely
-    const projectId = params.id;
-    
+    const { id: projectId } = await params;
+
     // Check if we're deleting a specific log or all logs
     const { searchParams } = new URL(request.url);
     const logId = searchParams.get('logId');
-    
+
     if (logId) {
       // Delete a specific log
       await deleteProjectLog(logId);
-      return NextResponse.json({ 
-        success: true, 
-        message: `Log ${logId} deleted successfully` 
+      return NextResponse.json({
+        success: true,
+        message: `Log ${logId} deleted successfully`
       });
     } else {
       // Delete all logs for the project
       const deletedCount = await deleteAllProjectLogs(projectId);
-      return NextResponse.json({ 
-        success: true, 
-        message: `${deletedCount} logs deleted for project ${projectId}` 
+      return NextResponse.json({
+        success: true,
+        message: `${deletedCount} logs deleted for project ${projectId}`
       });
     }
   } catch (error) {
@@ -112,4 +112,4 @@ export async function DELETE(
       { status: 500 }
     );
   }
-} 
+}

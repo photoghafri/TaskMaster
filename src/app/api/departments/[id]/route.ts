@@ -1,35 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { 
-  getDepartmentById, 
-  updateDepartment, 
+import {
+  getDepartmentById,
+  updateDepartment,
   deleteDepartment,
   departmentNameExists
 } from '@/services/departmentService';
 import { db } from '@/lib/firebase';
-import { 
-  collection, 
-  query, 
-  where, 
-  getDocs 
+import {
+  collection,
+  query,
+  where,
+  getDocs
 } from 'firebase/firestore';
 
 // GET /api/departments/[id] - Get department by ID
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params;
-    
+    const { id } = await context.params;
+
     const department = await getDepartmentById(id);
-    
+
     if (!department) {
       return NextResponse.json(
         { error: 'Department not found' },
         { status: 404 }
       );
     }
-    
+
     // Get users in department
     const usersQuery = query(collection(db, 'users'), where('departmentId', '==', id));
     const usersSnapshot = await getDocs(usersQuery);
@@ -42,7 +42,7 @@ export async function GET(
         role: data.role
       };
     });
-    
+
     // Get projects in department
     const projectsQuery = query(collection(db, 'projects'), where('departmentId', '==', id));
     const projectsSnapshot = await getDocs(projectsQuery);
@@ -56,7 +56,7 @@ export async function GET(
         percentage: data.percentage
       };
     });
-    
+
     // Return department with related data
     return NextResponse.json({
       ...department,
@@ -75,12 +75,12 @@ export async function GET(
 // PATCH /api/departments/[id] - Update department by ID
 export async function PATCH(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params;
+    const { id } = await context.params;
     const body = await request.json();
-    
+
     // Validate required fields
     if (body.name !== undefined && body.name.trim() === '') {
       return NextResponse.json(
@@ -108,15 +108,15 @@ export async function PATCH(
         );
       }
     }
-    
+
     // Update the department
     const updateData: any = {};
     if (body.name !== undefined) updateData.name = body.name;
     if (body.description !== undefined) updateData.description = body.description;
     if (body.budget !== undefined) updateData.budget = parseFloat(body.budget);
-    
+
     const department = await updateDepartment(id, updateData);
-    
+
     return NextResponse.json(department);
   } catch (error) {
     console.error('Error updating department:', error);
@@ -130,17 +130,17 @@ export async function PATCH(
 // DELETE /api/departments/[id] - Delete department by ID
 export async function DELETE(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params;
-    
+    const { id } = await context.params;
+
     await deleteDepartment(id);
-    
+
     return new NextResponse(null, { status: 204 });
   } catch (error: any) {
     console.error('Error deleting department:', error);
-    
+
     // Check for specific error messages
     if (error.message?.includes('associated users') || error.message?.includes('associated projects')) {
       return NextResponse.json(
@@ -148,10 +148,10 @@ export async function DELETE(
         { status: 400 }
       );
     }
-    
+
     return NextResponse.json(
       { error: 'Failed to delete department' },
       { status: 500 }
     );
   }
-} 
+}

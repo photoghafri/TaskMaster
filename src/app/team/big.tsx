@@ -567,7 +567,6 @@ export default function TeamPage() {
             </>
           )}
         </div>
-      </div>
 
         {/* Add/Edit Member Modal */}
         {isModalOpen && (

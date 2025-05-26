@@ -35,8 +35,8 @@ export async function GET(request: NextRequest) {
         id: doc.id,
         ...doc.data()
       }))
-      .filter(project => !project.isArchived)
-      .sort((a, b) => {
+      .filter((project: any) => !project.isArchived)
+      .sort((a: any, b: any) => {
         // Sort by createdAt descending
         const aDate = a.createdAt ? new Date(a.createdAt).getTime() : 0;
         const bDate = b.createdAt ? new Date(b.createdAt).getTime() : 0;
