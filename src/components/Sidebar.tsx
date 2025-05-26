@@ -228,7 +228,7 @@ export default function Sidebar({ className = '' }: { className?: string }) {
 
           {/* User Menu Dropdown */}
           {userMenuOpen && (
-            <div className={`absolute ${collapsed ? 'bottom-full -left-32' : 'bottom-full left-0'} w-48 mb-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg z-50`} ref={dropdownRef}>
+            <div className={`absolute ${collapsed ? 'bottom-full -left-32' : 'bottom-full left-0'} w-48 mb-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg z-[9999]`} ref={dropdownRef}>
               <div className="py-1">
                 <Link
                   href="/settings"

@@ -125,7 +125,7 @@ export default function AppLayout({ children, title }: AppLayoutProps) {
                   </button>
 
                   {userMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 rounded-md bg-white dark:bg-slate-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                    <div className="absolute right-0 mt-2 w-48 rounded-md bg-white dark:bg-slate-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-[9999]">
                       <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700">
                         <p className="text-sm font-medium text-slate-900 dark:text-white">
                           {session?.user?.name || 'User'}
