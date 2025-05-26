@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import AppLayout from '@/components/AppLayout';
-import { User, getAllUsers } from '@/services/userService';
+import AppLayout from '../../components/AppLayout';
+import { User, getAllUsers } from '../../services/userService';
 import { UserIcon, UserGroupIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 
 export default function UsersPage() {
@@ -124,7 +124,7 @@ export default function UsersPage() {
                     </td>
                   </tr>
                 ))}
-                
+
                 {users.length === 0 && !loading && (
                   <tr>
                     <td colSpan={4} className="px-6 py-4 text-center text-gray-500">
@@ -139,4 +139,4 @@ export default function UsersPage() {
       </div>
     </AppLayout>
   );
-} 
+}

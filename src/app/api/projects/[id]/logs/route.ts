@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getProjectLogs, createProjectLog, deleteProjectLog, deleteAllProjectLogs } from '@/services/projectLogService';
+import { getProjectLogs, createProjectLog, deleteProjectLog, deleteAllProjectLogs } from '../../../../../services/projectLogService';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { authOptions } from '../../../../../lib/auth';
 
 // GET /api/projects/[id]/logs - Get logs for a specific project
 export async function GET(

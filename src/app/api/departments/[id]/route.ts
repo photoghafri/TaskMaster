@@ -4,8 +4,8 @@ import {
   updateDepartment,
   deleteDepartment,
   departmentNameExists
-} from '@/services/departmentService';
-import { db } from '@/lib/firebase';
+} from '../../../../services/departmentService';
+import { db } from '../../../../lib/firebase';
 import {
   collection,
   query,

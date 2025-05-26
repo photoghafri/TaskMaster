@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { updateUser, getUserById } from '@/services/userService';
+import { authOptions } from '../../../../lib/auth';
+import { updateUser, getUserById } from '../../../../services/userService';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { db } from '../../../../lib/firebase';
 
 // GET /api/user/profile - Get current user's profile
 export async function GET() {

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { 
-  getAllDepartments, 
-  createDepartment, 
-  updateDepartment, 
+import {
+  getAllDepartments,
+  createDepartment,
+  updateDepartment,
   deleteDepartment,
   departmentNameExists
-} from '@/services/departmentService';
+} from '../../../services/departmentService';
 
 // GET /api/departments - Get all departments
 export async function GET() {
@@ -25,7 +25,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
+
     // Validate required fields
     if (!body.name || body.name.trim() === '') {
       return NextResponse.json(
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       description: body.description || null,
       budget: body.budget ? parseFloat(body.budget) : null,
     });
-    
+
     return NextResponse.json(department, { status: 201 });
   } catch (error) {
     console.error('Error creating department:', error);
@@ -64,14 +64,14 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
-    
+
     if (!body.id) {
       return NextResponse.json(
         { error: 'Department ID is required' },
         { status: 400 }
       );
     }
-    
+
     if (!body.name || body.name.trim() === '') {
       return NextResponse.json(
         { error: 'Department name is required' },
@@ -87,13 +87,13 @@ export async function PUT(request: NextRequest) {
         { status: 400 }
       );
     }
-    
+
     const department = await updateDepartment(body.id, {
       name: body.name,
       description: body.description || null,
       budget: body.budget ? parseFloat(body.budget) : null,
     });
-    
+
     return NextResponse.json(department);
   } catch (error) {
     console.error('Error updating department:', error);
@@ -108,20 +108,20 @@ export async function PUT(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   try {
     const id = request.nextUrl.searchParams.get('id');
-    
+
     if (!id) {
       return NextResponse.json(
         { error: 'Department ID is required' },
         { status: 400 }
       );
     }
-    
+
     await deleteDepartment(id);
-    
+
     return new NextResponse(null, { status: 204 });
   } catch (error: any) {
     console.error('Error deleting department:', error);
-    
+
     // Check for specific error messages
     if (error.message?.includes('associated users') || error.message?.includes('associated projects')) {
       return NextResponse.json(
@@ -129,10 +129,10 @@ export async function DELETE(request: NextRequest) {
         { status: 400 }
       );
     }
-    
+
     return NextResponse.json(
       { error: 'Failed to delete department' },
       { status: 500 }
     );
   }
-} 
+}
